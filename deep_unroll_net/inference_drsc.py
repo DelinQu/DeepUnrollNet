@@ -46,31 +46,31 @@ class Demo(Generic_train_test):
                 test_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs_0.png')
                 suffix = '.png' if os.path.isfile(test_path) else '.jpg'
           
-                im_rs0_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs_0'+suffix)
-                im_rs1_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs_1'+suffix)
+                im_rs0_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs0'+suffix)
+                im_rs1_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs1'+suffix)
+                im_rs2_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs2'+suffix)
+                im_rs3_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs3'+suffix)
 
-#                 im_rs0 = torch.from_numpy(io.imread(im_rs0_path).transpose(2,0,1))[:3,:448,:].unsqueeze(0).clone()
-#                 im_rs1 = torch.from_numpy(io.imread(im_rs1_path).transpose(2,0,1))[:3,:448,:].unsqueeze(0).clone()
                 im_rs0 = torch.from_numpy(io.imread(im_rs0_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
                 im_rs1 = torch.from_numpy(io.imread(im_rs1_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
+                im_rs2 = torch.from_numpy(io.imread(im_rs0_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
+                im_rs3 = torch.from_numpy(io.imread(im_rs1_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
     
                 im_rs = torch.cat([im_rs0,im_rs1], dim=1).float()/255.
+                im_rs_2 = torch.cat([im_rs2,im_rs3], dim=1).float()/255.
+      
                 _input = [im_rs, None, None, 0]
+                _input_2 = [im_rs_2, None, None, 0]
                 
                 self.model.set_input(_input)
                 pred_im, _, _=self.model.forward()
+                self.model.set_input(_input_2)
+                pred_im_2, _, _=self.model.forward()
 
                 # save results
-#                 im_gs = io.imread(os.path.join(os.path.join(self.opts.data_dir, seq), 'gs_1.png'))
-#                 im_rs = io.imread(im_rs1_path)
-
-#                 im_gs = im_gs[:448].copy()
-#                 im_rs = im_rs[:448].copy()
-
-#                 io.imsave(os.path.join(self.opts.results_dir, seq+'_rs_1.png'), im_rs)
-#                 io.imsave(os.path.join(self.opts.results_dir, seq+'_gs_1.png'), im_gs)
-                io.imsave(os.path.join(self.opts.results_dir, seq+'_pred_1.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
-                print('saved', self.opts.results_dir, seq+'_pred_1.png')
+                io.imsave(os.path.join(self.opts.results_dir, seq+'pred_1.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
+                io.imsave(os.path.join(self.opts.results_dir, seq+'pred_2.png'), (pred_im_2[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
+                print('saved', self.opts.results_dir, seq+'pred_1.png', seq+'pred_2.png')
                     
 Demo(model, opts, None, None).test()
 
