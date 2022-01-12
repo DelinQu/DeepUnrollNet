@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # create an empty folder for experimental results
-mkdir -p experiments/results_drsc
+mkdir -p experiments/results_drsc_origin
+mkdir -p experiments/results_drsc_v1
+mkdir -p experiments/results_drsc_carcam
 
 cd deep_unroll_net
 
@@ -9,5 +11,20 @@ python inference_drsc.py \
             --model_label='pretrained_fastec' \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
-            --results_dir=../experiments/results_drsc \
-            --data_dir='../dataset/Drsc'
+            --results_dir=../experiments/results_drsc_origin \
+            --data_dir='../dataset/origin'
+
+python inference_drsc.py \
+            --model_label='pretrained_fastec' \
+            --log_dir=../experiments/pretrained_models \
+            --net_type='netMiddle' \
+            --results_dir=../experiments/results_drsc_v1 \
+            --data_dir='../dataset/v1'
+            
+            
+python inference_drsc.py \
+            --model_label='pretrained_fastec' \
+            --log_dir=../experiments/pretrained_models \
+            --net_type='netMiddle' \
+            --results_dir=../experiments/results_drsc_carcam \
+            --data_dir='../dataset/carcam'
