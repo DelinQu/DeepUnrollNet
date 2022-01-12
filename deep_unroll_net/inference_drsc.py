@@ -43,7 +43,7 @@ class Demo(Generic_train_test):
         with torch.no_grad():
             seq_lists = os.listdir(self.opts.data_dir)
             for seq in seq_lists:
-                test_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs_0.png')
+                test_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs0.png')
                 suffix = '.png' if os.path.isfile(test_path) else '.jpg'
           
                 im_rs0_path = os.path.join(os.path.join(self.opts.data_dir, seq), 'rs0'+suffix)
