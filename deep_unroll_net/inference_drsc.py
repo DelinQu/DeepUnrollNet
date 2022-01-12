@@ -53,8 +53,8 @@ class Demo(Generic_train_test):
 
                 im_rs0 = torch.from_numpy(io.imread(im_rs0_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
                 im_rs1 = torch.from_numpy(io.imread(im_rs1_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
-                im_rs2 = torch.from_numpy(io.imread(im_rs0_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
-                im_rs3 = torch.from_numpy(io.imread(im_rs1_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
+                im_rs2 = torch.from_numpy(io.imread(im_rs2_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
+                im_rs3 = torch.from_numpy(io.imread(im_rs3_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
     
                 im_rs = torch.cat([im_rs0,im_rs1], dim=1).float()/255.
                 im_rs_2 = torch.cat([im_rs2,im_rs3], dim=1).float()/255.
