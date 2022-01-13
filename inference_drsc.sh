@@ -12,14 +12,14 @@ python inference_drsc.py \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
             --results_dir=../experiments/results_drsc_origin \
-            --data_dir='../dataset/origin'
+            --data_dir='/kaggle/input/rs2view/origin'
 
 python inference_drsc.py \
             --model_label='pretrained_fastec' \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
             --results_dir=../experiments/results_drsc_v1 \
-            --data_dir='../dataset/v1'
+            --data_dir='/kaggle/input/rs2view/v1'
             
             
 python inference_drsc.py \
@@ -27,4 +27,4 @@ python inference_drsc.py \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
             --results_dir=../experiments/results_drsc_carcam \
-            --data_dir='../dataset/carcam'
+            --data_dir='/kaggle/input/rs2view/carcam'
