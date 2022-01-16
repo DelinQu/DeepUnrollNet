@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # create an empty folder for experimental results
-mkdir -p experiments/results_drsc_origin
-mkdir -p experiments/results_drsc_v1
-mkdir -p experiments/results_drsc_carcam
+mkdir -p experiments/Carcam
+mkdir -p experiments/3GS_sequence
+mkdir -p experiments/Grant_Park
+mkdir -p experiments/W890i_sequence
+mkdir -p experiments/Sequence77
 
 cd deep_unroll_net
 
@@ -11,20 +13,36 @@ python inference_drsc.py \
             --model_label='pretrained_fastec' \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
-            --results_dir=../experiments/results_drsc_origin \
-            --data_dir='/kaggle/input/rs2view/origin'
+            --results_dir=../experiments/Carcam \
+            --data_dir='/kaggle/input/rs2view/Carcam'
 
 python inference_drsc.py \
             --model_label='pretrained_fastec' \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
-            --results_dir=../experiments/results_drsc_v1 \
-            --data_dir='/kaggle/input/rs2view/v1'
+            --results_dir=../experiments/3GS_sequence \
+            --data_dir='/kaggle/input/rs2view/3GS_sequence'
             
             
 python inference_drsc.py \
             --model_label='pretrained_fastec' \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
-            --results_dir=../experiments/results_drsc_carcam \
-            --data_dir='/kaggle/input/rs2view/carcam'
+            --results_dir=../experiments/Grant_Park \
+            --data_dir='/kaggle/input/rs2view/Grant_Park'
+            
+
+python inference_drsc.py \
+            --model_label='pretrained_fastec' \
+            --log_dir=../experiments/pretrained_models \
+            --net_type='netMiddle' \
+            --results_dir=../experiments/W890i_sequence \
+            --data_dir='/kaggle/input/rs2view/W890i_sequence'
+            
+            
+python inference_drsc.py \
+            --model_label='pretrained_fastec' \
+            --log_dir=../experiments/pretrained_models \
+            --net_type='netMiddle' \
+            --results_dir=../experiments/Sequence77 \
+            --data_dir='/kaggle/input/rs2view/Sequence77'
