@@ -68,9 +68,10 @@ class Demo(Generic_train_test):
                 pred_im_2, _, _=self.model.forward()
 
                 # save results
-                io.imsave(os.path.join(self.opts.results_dir, seq+'rec0.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
-                io.imsave(os.path.join(self.opts.results_dir, seq+'rec1.png'), (pred_im_2[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
-                print('saved', self.opts.results_dir, seq+'rec0.png', seq+'rec1.png')
+                os.mkdir(os.path.join(self.opts.results_dir, seq))
+                io.imsave(os.path.join(self.opts.results_dir, seq, 'rec0.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
+                io.imsave(os.path.join(self.opts.results_dir, seq, 'rec1.png'), (pred_im_2[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
+                print('saved', self.opts.results_dir, seq+'/rec0.png', seq+'/rec1.png')
                     
 Demo(model, opts, None, None).test()
 
