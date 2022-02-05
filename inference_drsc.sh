@@ -53,4 +53,4 @@ python inference_drsc.py \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
             --results_dir=../experiments/Sequence77_Translation \
-            --data_dir='/kaggle/input/Sequence77translation/Sequence77_Translation'
+            --data_dir='/kaggle/input/sequence77translation/Sequence77_Translation'
