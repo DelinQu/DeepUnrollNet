@@ -92,6 +92,13 @@ python inference_drsc.py \
             --model_label='pretrained_fastec' \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
+            --results_dir=../experiments/House_Rot2_B40 \
+            --data_dir='/kaggle/input/rs2view2/House_Rot2_B40'
+            
+python inference_drsc.py \
+            --model_label='pretrained_fastec' \
+            --log_dir=../experiments/pretrained_models \
+            --net_type='netMiddle' \
             --results_dir=../experiments/House_Trans1_B40 \
             --data_dir='/kaggle/input/rs2view2/House_Trans1_B40'
 
