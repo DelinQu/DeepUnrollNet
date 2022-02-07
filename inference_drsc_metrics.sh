@@ -12,7 +12,7 @@ python inference_drsc_metrics.py \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
             --results_dir=../experiments/Carla \
-            --data_dir='../Carla_rs_test/'
+            --data_dir='../Carla_rs_test/Carla_town05'
 
 # python inference_drsc_metrics.py \
 #             --model_label='pretrained_fastec' \
