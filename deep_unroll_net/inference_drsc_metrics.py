@@ -43,7 +43,7 @@ class Demo(Generic_train_test):
         with torch.no_grad():
             # get the dirs
             rs_path = self.opts.data_dir
-            dir_list = list(filter(lambda pth:os.path.isdir(rs_path+'/'+pth), os.listdir(rs_path)))
+            dir_list = list(filter(lambda pth:os.path.isdir(os.path.join(rs_path,pth)), os.listdir(rs_path)))
             dir_list.sort(key=lambda x:int(x[4:]))
          
             for d in dir_list:
