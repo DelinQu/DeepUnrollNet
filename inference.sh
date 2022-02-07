@@ -36,7 +36,7 @@ python inference.py \
           --dataset_root_dir=$fastec_root_path_test_data \
           --log_dir=$model_dir \
           --net_type='netMiddle' \
-          --results_dir=$results_dir \
-          --model_label=results_dir_Fastec \
+          --results_dir=$results_dir_Fastec \
+          --model_label=pretrained_fastec \
           --compute_metrics 
           
