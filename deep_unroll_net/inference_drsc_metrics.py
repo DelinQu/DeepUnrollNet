@@ -83,7 +83,7 @@ class Demo(Generic_train_test):
 # Fastec
 #                     io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i+1][0:3]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
 # IMU
-                    io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i+1][0:-4]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)
-                    print('saved', self.opts.results_dir, d, rs_img_list[2*i+1][0:3]+'_rec.png')
+                    io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i+1][0:-4]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)))
+                    print('saved', self.opts.results_dir, d, rs_img_list[2*i+1][0:-4]+'_rec.png')
                     
 Demo(model, opts, None, None).test()
