@@ -44,11 +44,13 @@ class Demo(Generic_train_test):
             # get the dirs
             rs_path = self.opts.data_dir
             dir_list = list(filter(lambda pth:os.path.isdir(os.path.join(rs_path,pth)), os.listdir(rs_path)))
-            dir_list.sort(key=lambda x:int(x[4:]))
+#             dir_list.sort(key=lambda x:int(x[4:]))
          
             for d in dir_list:
-                rs_img_list = list(filter(lambda x:('_rs.png' in x), os.listdir(os.path.join(rs_path,d))))
-                rs_img_list.sort(key=lambda x:x[0:4])
+#                 rs_img_list = list(filter(lambda x:('_rs.png' in x), os.listdir(os.path.join(rs_path,d))))
+#                 rs_img_list.sort(key=lambda x:x[0:4])
+                rs_img_list = list(filter(lambda x:('_rolling.png' in x), os.listdir(os.path.join(rs_path,d))))
+                rs_img_list.sort(key=lambda x:x[0:3])
                 
                 os.mkdir(os.path.join(self.opts.results_dir, d))
                 
@@ -67,7 +69,8 @@ class Demo(Generic_train_test):
                     pred_im, _, _=self.model.forward()
 
                     # save results
-                    io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i][0:4]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
+#                     io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i][0:4]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
+                    io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i][0:3]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
                     print('saved', self.opts.results_dir, d, rs_img_list[2*i][0:4]+'_rec.png')
                     
 Demo(model, opts, None, None).test()
