@@ -27,4 +27,4 @@ python inference_drsc_metrics.py \
             --log_dir=../experiments/pretrained_models \
             --net_type='netMiddle' \
             --results_dir=../experiments/IMU_test \
-            --data_dir='../input/imu-test/IMU_test'
+            --data_dir='../kaggle/input/imu-test/IMU_test'
