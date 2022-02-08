@@ -9,3 +9,4 @@ mv test Carla_rs_test
 gdown --id 1Yfu6sOgIa6vJ6VwAedycjLu-_7rx7vZ2
 unzip fastec_rs_test.zip
 mv test Fastec_rs_test
+rm -rf ./Fastec_rs_test/190206_Tuebingen_000009/000_* ./Fastec_rs_test/190206_Tuebingen_000009/033_*
