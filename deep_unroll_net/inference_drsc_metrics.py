@@ -44,28 +44,17 @@ class Demo(Generic_train_test):
             # get the dirs
             rs_path = self.opts.data_dir
             dir_list = list(filter(lambda pth:os.path.isdir(os.path.join(rs_path,pth)), os.listdir(rs_path)))
-#             dir_list.sort(key=lambda x:int(x[4:]))  # unnessary
-         
-            for d in dir_list:
-# Carla
-#                 rs_img_list = list(filter(lambda x:('_rs.png' in x), os.listdir(os.path.join(rs_path,d))))
-#                 rs_img_list.sort(key=lambda x:x[0:4])
-# Fastec
-#                 rs_img_list = list(filter(lambda x:('_rolling.png' in x), os.listdir(os.path.join(rs_path,d))))
-#                 rs_img_list.sort(key=lambda x:x[0:3])
-# IMU
-                rs_img_list = list(filter(lambda x:('.png' in x), os.listdir(os.path.join(rs_path,d,'images'))))
-                rs_img_list.sort(key=lambda x:x[0:-4])
+            dir_list.sort()
 
-                os.mkdir(os.path.join(self.opts.results_dir, d))
-                
+            for d in dir_list:
+                rs_img_list = os.listdir(os.path.join(rs_path,d))
+                rs_img_list.sort()
+                suffix = rs_img_list[0].split('.')[-1]
+
+                os.makedirs(os.path.join(self.opts.results_dir, d), exist_ok=True)
                 for i in range(len(rs_img_list)//2):
-# Carla and Fastec
-#                     im_rs0_path = os.path.join(self.opts.data_dir, d, rs_img_list[2*i])
-#                     im_rs1_path = os.path.join(self.opts.data_dir, d, rs_img_list[2*i+1])
-# IMU
-                    im_rs0_path = os.path.join(self.opts.data_dir, d, 'images', rs_img_list[2*i])
-                    im_rs1_path = os.path.join(self.opts.data_dir, d, 'images', rs_img_list[2*i+1])
+                    im_rs0_path = os.path.join(self.opts.data_dir, d, rs_img_list[2*i])
+                    im_rs1_path = os.path.join(self.opts.data_dir, d, rs_img_list[2*i+1])
 
                     im_rs0 = torch.from_numpy(io.imread(im_rs0_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
                     im_rs1 = torch.from_numpy(io.imread(im_rs1_path).transpose(2,0,1))[:3,:,:].unsqueeze(0).clone()
@@ -78,12 +67,8 @@ class Demo(Generic_train_test):
                     pred_im, _, _=self.model.forward()
 
                     # save results
-# Carla
-#                     io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i+1][0:4]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
-# Fastec
-#                     io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i+1][0:3]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
-# IMU
-                    io.imsave(os.path.join(self.opts.results_dir, d, rs_img_list[2*i+1][0:-4]+'_rec.png'), (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))
-                    print('saved', self.opts.results_dir, d, rs_img_list[2*i+1][0:-4]+'_rec.png')
-                    
+                    rec_img_prefix = rs_img_list[2*i+1].split('.')[0]
+                    io.imsave(os.path.join(self.opts.results_dir, d, rec_img_prefix+'_rec.'+suffix), \
+                        (pred_im[0].clamp(0,1).cpu().numpy().transpose(0,2,3,1)[0]*255).astype(np.uint8))  
+
 Demo(model, opts, None, None).test()
